@@ -1,0 +1,26 @@
+@startuml
+
+interface ResourceLoader {
+    +getResource(String location)
+    +getClassLoader()
+}
+note right: Strategy interface for loading resources
+class DefaultResourceLoader
+note right: AbstractApplicationContext的基类
+ResourceLoader <|.. DefaultResourceLoader
+
+interface ResourcePatternResolver
+ResourceLoader <|.. ResourcePatternResolver
+note right: Strategy interface for resolving a location pattern\nApplicationContext基类
+
+class FileSystemResourceLoader
+DefaultResourceLoader <|-- FileSystemResourceLoader
+
+class ClassRelativeResourceLoader
+DefaultResourceLoader <|-- ClassRelativeResourceLoader
+
+class PathMatchingResourcePatternResolver
+ResourcePatternResolver <|.. PathMatchingResourcePatternResolver
+
+
+@enduml
