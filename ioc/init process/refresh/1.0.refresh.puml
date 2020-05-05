@@ -1,0 +1,33 @@
+@startuml
+hide footbox
+
+
+AnnotationConfigApplicationContext -> AnnotationConfigApplicationContext: refresh
+
+AnnotationConfigApplicationContext -> AbstractApplicationContext: refresh()
+autonumber
+AbstractApplicationContext -> AbstractApplicationContext: prepareRefresh()
+
+AbstractApplicationContext -> AbstractApplicationContext: obtainRefreshBeanFactory()
+
+AbstractApplicationContext -> AbstractApplicationContext: prepareBeanFactory(beanFactory)
+
+AbstractApplicationContext -> AbstractApplicationContext: postProcessBeanFactory(beanFactory)
+
+AbstractApplicationContext -> AbstractApplicationContext: invokeBeanFactoryPostProcessors(beanFactory)
+
+AbstractApplicationContext -> AbstractApplicationContext: registerBeanPostProcessors(beanFactory)
+
+AbstractApplicationContext -> AbstractApplicationContext: initMessageSource()
+
+AbstractApplicationContext -> AbstractApplicationContext: initApplicationEventMulticaster()
+
+AbstractApplicationContext -> AbstractApplicationContext: onRefresh()
+
+AbstractApplicationContext -> AbstractApplicationContext: registerListeners()
+
+AbstractApplicationContext -> AbstractApplicationContext: finishBeanInitialization(beanFactory)
+
+AbstractApplicationContext -> AbstractApplicationContext: finishFresh()
+
+@enduml

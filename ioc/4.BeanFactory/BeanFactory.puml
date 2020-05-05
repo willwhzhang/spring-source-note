@@ -1,0 +1,11 @@
+@startuml
+
+interface ListableBeanFactory extends BeanFactory
+interface HierarchicalBeanFactory extends BeanFactory
+interface AutowireCapableBeanFactory extends BeanFactory
+
+interface ConfigurableBeanFactory extends HierarchicalBeanFactory, SingletonBeanRegistry
+
+interface ConfigurableListableBeanFactory extends ListableBeanFactory, AutowireCapableBeanFactory, ConfigurableBeanFactory
+
+@enduml

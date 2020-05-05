@@ -1,0 +1,13 @@
+@startuml
+
+class AnnotationConfigApplicationContext extends GenericApplicationContext implements AnnotationConfigRegistry
+
+class AnnotatedBeanDefinitionReader
+class ClassPathScanningCandidateComponentProvider implements EnvironmentCapable, ResourceLoaderAware
+class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateComponentProvider
+
+
+AnnotatedBeanDefinitionReader <-- AnnotationConfigApplicationContext : reader
+ClassPathBeanDefinitionScanner <-- AnnotationConfigApplicationContext : scanner
+
+@enduml

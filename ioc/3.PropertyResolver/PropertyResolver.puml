@@ -1,0 +1,12 @@
+@startuml
+
+interface PropertyResolver
+interface Environment extends PropertyResolver
+interface ConfigurablePropertyResolver extends PropertyResolver
+
+interface ConfigurableEnvironment extends Environment, ConfigurablePropertyResolver
+abstract class AbstractEnvironment implements ConfigurableEnvironment
+
+class StandardEnvironment extends AbstractEnvironment
+
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+hide footbox
+
+[-> AbstractApplicationContext: obtainFreshBeanFactory
+
+AbstractApplicationContext -> GenericApplicationContext: refreshBeanFactory()
+note right: Do nothing: We hold a single internal BeanFactory and rely on callers\nto register beans through our public methods (or the BeanFactory's).
+
+AbstractApplicationContext -> GenericApplicationContext: getBeanFactory()
+note right: Return the single internal BeanFactory held by this context
+
+@enduml

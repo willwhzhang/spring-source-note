@@ -1,0 +1,18 @@
+@startuml
+hide footbox
+
+[-> AbstractApplicationContext: prepareRefresh()
+activate AbstractApplicationContext
+note right: Prepare this context for refreshing, setting its startup date and\nactive flag as well as performing any initialization of property sources.
+
+AbstractApplicationContext -> AbstractApplicationContext: initPropertySources()
+note right: For subclasses: do nothing by default.
+
+AbstractApplicationContext -> AbstractApplicationContext: getEnvironment()
+activate AbstractApplicationContext
+AbstractApplicationContext -> StandardEnvironment: new
+deactivate AbstractApplicationContext
+
+AbstractApplicationContext -> StandardEnvironment: validateRequiredProperties()
+note right: Validate that all properties marked as required are resolvable
+@enduml

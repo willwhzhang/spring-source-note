@@ -1,0 +1,56 @@
+@startuml
+
+interface EnvironmentCapable
+
+interface BeanFactory
+interface ListableBeanFactory extends BeanFactory
+
+interface HierarchicalBeanFactory extends BeanFactory
+
+interface MessageSource
+
+interface ApplicationEventPublisher
+
+interface ResourcePatternResolver
+
+interface ApplicationContext
+EnvironmentCapable <|-- ApplicationContext
+ListableBeanFactory <|-- ApplicationContext
+HierarchicalBeanFactory <|-- ApplicationContext
+MessageSource <|-- ApplicationContext
+ApplicationEventPublisher <|-- ApplicationContext
+ResourcePatternResolver <|-- ApplicationContext
+
+interface Lifecycle
+interface Closeable
+
+interface ConfigurableApplicationContext extends ApplicationContext, Lifecycle, Closeable
+
+class AbstractApplicationContext extends DefaultResourceLoader implements ConfigurableApplicationContext {
+    -ApplicationContext parent;
+    -ConfigurableEnvironment environment;
+    -List<BeanFactoryPostProcessor> beanFactoryPostProcessors
+    -long startupDate
+    -AtomicBoolean active
+    -AtomicBoolean closed
+    -Object startupShutdownMonitor
+    -Thread shutdownHook
+    -ResourcePatternResolver resourcePatternResolver
+    -LifecycleProcessor lifecycleProcessor
+    -MessageSource messageSource
+    -ApplicationEventMulticaster applicationEventMulticaster
+    -Set<ApplicationListener<?>> applicationListeners
+    -Set<ApplicationListener<?>> earlyApplicationListeners
+    -Set<ApplicationEvent> earlyApplicationEvents
+}
+
+interface AliasRegistry
+interface BeanDefinitionRegistry extends AliasRegistry
+
+class GenericApplicationContext extends AbstractApplicationContext implements BeanDefinitionRegistry
+
+interface AnnotationConfigRegistry
+
+class AnnotationConfigApplicationContext extends GenericApplicationContext implements AnnotationConfigRegistry
+
+@enduml

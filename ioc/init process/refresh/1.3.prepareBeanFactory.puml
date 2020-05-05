@@ -1,0 +1,44 @@
+@startuml
+hide footbox
+
+[-> AbstractApplicationContext: prepareBeanFactory(beanFactory)
+
+AbstractApplicationContext -> ConfigurableListableBeanFactory: setBeanClassLoader()
+
+AbstractApplicationContext -> ConfigurableListableBeanFactory: setBeanExpressionResolver()
+activate ConfigurableListableBeanFactory
+ConfigurableListableBeanFactory -> StandardBeanExpressionResolver: new
+deactivate ConfigurableListableBeanFactory
+
+AbstractApplicationContext -> ConfigurableListableBeanFactory: addPropertyEditorRegistrar()
+activate ConfigurableListableBeanFactory
+ConfigurableListableBeanFactory -> ResourceEditorRegistrar: new
+deactivate ConfigurableListableBeanFactory
+
+AbstractApplicationContext -> ConfigurableListableBeanFactory: addBeanPostProcessor()
+activate ConfigurableListableBeanFactory
+ConfigurableListableBeanFactory -> ApplicationContextAwareProcessor: new
+deactivate ConfigurableListableBeanFactory
+
+AbstractApplicationContext -> ConfigurableListableBeanFactory: ignoreDependencyInterface(EnvironmentAware.class)
+AbstractApplicationContext -> ConfigurableListableBeanFactory: ignoreDependencyInterface(EmbeddedValueResolverAware.class)
+AbstractApplicationContext -> ConfigurableListableBeanFactory: ignoreDependencyInterface(ResourceLoaderAware.class)
+AbstractApplicationContext -> ConfigurableListableBeanFactory: ignoreDependencyInterface(ApplicationEventPublisherAware.class)
+AbstractApplicationContext -> ConfigurableListableBeanFactory: ignoreDependencyInterface(MessageSourceAware.class)
+AbstractApplicationContext -> ConfigurableListableBeanFactory: ignoreDependencyInterface(ApplicationContextAware.class)
+
+
+AbstractApplicationContext -> ConfigurableListableBeanFactory: egisterResolvableDependency(BeanFactory.class, beanFactory)
+AbstractApplicationContext -> ConfigurableListableBeanFactory: egisterResolvableDependency(ResourceLoader.class, this)
+AbstractApplicationContext -> ConfigurableListableBeanFactory: egisterResolvableDependency(ApplicationEventPublisher.class, this)
+AbstractApplicationContext -> ConfigurableListableBeanFactory: egisterResolvableDependency(ApplicationContext.class, this)
+
+AbstractApplicationContext -> ConfigurableListableBeanFactory: addBeanPostProcessor()
+activate ConfigurableListableBeanFactory
+ConfigurableListableBeanFactory -> ApplicationListenerDetector: new
+deactivate ConfigurableListableBeanFactory
+
+AbstractApplicationContext -> ConfigurableListableBeanFactory: // Detect a LoadTimeWeaver and prepare for weaving, if found.
+AbstractApplicationContext -> ConfigurableListableBeanFactory: // Register default environment beans.
+
+@enduml
